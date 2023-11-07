@@ -6,7 +6,7 @@ import com.miempresa.laboratorio11b.service.RetrofitInstance
 class PokemonRepository {
     private val pokemonService = RetrofitInstance.pokemonService
 
-    suspend fun getPokemon(): PokemonResponse {
-        return pokemonService.getPokemon()
+    suspend fun getPokemon(pokemonNumber: Int): PokemonResponse {
+        return pokemonService.getPokemon(pokemonNumber)
     }
 }

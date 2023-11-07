@@ -11,14 +11,13 @@ import kotlinx.coroutines.launch
 
 class PokemonViewModel : ViewModel() {
     private val repository = PokemonRepository()
-
     private val _pokemon = MutableLiveData<PokemonResponse>()
     val pokemon: LiveData<PokemonResponse> = _pokemon
 
-    fun fetchPokemon() {
+    fun fetchPokemon(pokemonNumber: Int) {
         viewModelScope.launch {
             try {
-                val poke = repository.getPokemon()
+                val poke = repository.getPokemon(pokemonNumber)
                 _pokemon.value = poke
                 Log.e("FetchPokemon", _pokemon.value.toString());
             } catch (e: Exception) {
