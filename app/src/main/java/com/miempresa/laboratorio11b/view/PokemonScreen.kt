@@ -3,6 +3,7 @@ package com.miempresa.laboratorio11b.view
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,16 +25,24 @@ import com.miempresa.laboratorio11b.viewmodel.PokemonViewModel
 fun PokemonScreen(viewModel: PokemonViewModel) {
     val pokemones by viewModel.pokemon.observeAsState(null)
 
+    /*Lanza automaticamente
     LaunchedEffect(Unit) {
         viewModel.fetchPokemon()
-    }
+    }*/
 
     Column {
+        Button(
+            onClick = {
+                viewModel.fetchPokemon()
+            },
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(text = "Obtener Habilidades")
+          }
+
         if (pokemones == null) {
-            // Show loading indicator or placeholder
             Text(text = "Loading...")
         } else {
-            // Display the list of credit cards
             PokemonItem(pokemones!!)
         }
     }
@@ -56,10 +65,6 @@ fun PokemonItem(pokemon: PokemonResponse) {
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
-            /*Text(
-                text = habilidad?: "No Pokemon found",
-                style = TextStyle(fontSize = 14.sp)
-            )*/
             Text(
                 text = "Habilidades del Pokémon:",
                 style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold)
